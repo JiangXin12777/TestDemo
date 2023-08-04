@@ -1,0 +1,78 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Fabulous Utility",
+	"Description": "A collection of utility functions, nodes and other things that can come in handy in Unreal Engine projects of any type.",
+	"Category": "Other",
+	"CreatedBy": "Sixze",
+	"CreatedByURL": "https://github.com/Sixze",
+	"DocsURL": "https://github.com/Sixze/FabulousUtility",
+	"MarketplaceURL": "",
+	"SupportURL": "https://github.com/Sixze/FabulousUtility/discussions",
+	"EngineVersion": "5.2.0",
+	"EnabledByDefault": true,
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "FabulousUtility",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "FabulousAbilitySystem",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "FabulousAnimation",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "FabulousAI",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "FabulousUI",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "FabulousOnline",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "FabulousEditor",
+			"Type": "Editor",
+			"LoadingPhase": "PreDefault"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "CommonUI",
+			"Enabled": true
+		},
+		{
+			"Name": "EnhancedInput",
+			"Enabled": true
+		},
+		{
+			"Name": "GameplayAbilities",
+			"Enabled": true
+		},
+		{
+			"Name": "OnlineSubsystem",
+			"Enabled": true
+		},
+		{
+			"Name": "OnlineSubsystemUtils",
+			"Enabled": true
+		}
+	]
+}

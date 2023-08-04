@@ -1,0 +1,33 @@
+{
+	"FileVersion": 3,
+	"Version": 11,
+	"VersionName": "1.1",
+	"FriendlyName": "GameplayTagMacroGenerator",
+	"Description": "A Macro Generator for GameplayTag.",
+	"Category": "GameplayTag",
+	"CreatedBy": "Shpz",
+	"CreatedByURL": "https://github.com/shpz",
+	"DocsURL": "https://github.com/shpz/GameplayTagMacroGenerator",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/7fcb315a0984496092e5ee3bc48b2606",
+	"SupportURL": "https://github.com/shpz/GameplayTagMacroGenerator/issues",
+	"EngineVersion": "5.2.0",
+	"CanContainContent": false,
+	"Installed": true,
+	"Modules": [
+		{
+			"Name": "GameplayTagMacroGenerator",
+			"Type": "Editor",
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [
+				"Win64",
+				"Mac"
+			]
+		}
+	],
+	"LocalizationTargets": [
+		{
+			"Name": "GTMG",
+			"LoadingPolicy": "Editor"
+		}
+	]
+}
