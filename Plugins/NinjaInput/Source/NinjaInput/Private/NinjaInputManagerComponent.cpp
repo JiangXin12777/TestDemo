@@ -109,12 +109,6 @@ void UNinjaInputManagerComponent::OnUnregister()
     Super::OnUnregister();
 }
 
-void UNinjaInputManagerComponent::RegisterOwnerAbilitySystemComponent(UAbilitySystemComponent* InVal)
-{
-	check(InVal);
-	AbilitySystemComponent = InVal;
-}
-
 void UNinjaInputManagerComponent::SetupInputComponent(const APawn* Pawn)
 {
 	InputComponent = Cast<UEnhancedInputComponent>(Pawn->InputComponent);
@@ -373,7 +367,7 @@ void UNinjaInputManagerComponent::RemoveInputMappingContext(const UInputMappingC
 
 UAbilitySystemComponent* UNinjaInputManagerComponent::GetAbilitySystemComponent() const
 {
-    return IsValid(AbilitySystemComponent.Get()) ? AbilitySystemComponent.Get() : UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(GetOwner());
+    return UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(GetOwner());
 }
 
 int32 UNinjaInputManagerComponent::SendGameplayEventToOwner(const FGameplayTag& GameplayEventTag,

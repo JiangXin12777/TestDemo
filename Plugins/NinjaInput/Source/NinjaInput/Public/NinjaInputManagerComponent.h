@@ -52,8 +52,8 @@ public:
     virtual void OnUnregister() override;
 
 	/** 注册当前所有者所装载的技能组件 */
-	UFUNCTION(BlueprintCallable, Category = "TD|Input Component")
-	void RegisterOwnerAbilitySystemComponent(UAbilitySystemComponent* InVal);
+	//UFUNCTION(BlueprintCallable, Category = "TD|Input Component")
+	//void RegisterOwnerAbilitySystemComponent(UAbilitySystemComponent* InVal);
 
 	/**
 	 * Provides the owner's Forward Reference.
