@@ -25,7 +25,8 @@ public class TestDemo : ModuleRules
 			"ALS",
 			"DeveloperSettings",
 			"ALSCamera",
-			"NinjaInput"
+			"NinjaInput",
+			"PhysicsCore"
 		});
 	}
 }
