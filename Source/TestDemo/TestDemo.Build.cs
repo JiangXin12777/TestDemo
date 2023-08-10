@@ -26,7 +26,13 @@ public class TestDemo : ModuleRules
 			"DeveloperSettings",
 			"ALSCamera",
 			"NinjaInput",
-			"PhysicsCore"
+			"PhysicsCore",
+			"GameplayMessageRuntime",
+			"ModularGameplay",
+			"NetCore",
+			"IrisCore",
+			"Niagara",
+			"SlateCore"
 		});
 	}
 }
