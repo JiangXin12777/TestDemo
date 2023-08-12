@@ -9,7 +9,7 @@ class UStaticMeshComponent;
 class UCapsuleComponent;
 
 /**
- * 武器装备实例
+ * Weapon generator.
  */
 UCLASS()
 class ATD_WeaponSpawner : public AActor
@@ -18,14 +18,23 @@ class ATD_WeaponSpawner : public AActor
 public:
 	ATD_WeaponSpawner(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 	
-	/** 当武器生成时，检查 Pawn 是否站在垫子上。 */
+	/** 当武器生成时，检查范围内是否存在玩家。 */
 	void CheckForExistingOverlaps();
 
-	/** 尝试拿起武器 */
+	/**
+	 * 尝试拿起武器
+	 * @param Pawn 接收道具的玩家
+	 */
 	UFUNCTION(BlueprintNativeEvent, Category = "TD|WeaponPickup")
 	void AttemptPickUpWeapon(APawn* Pawn);
 
-	/** 蓝图重写（装载武器） */
+	/**
+	 * （装载武器）
+	 * @param WeaponItemClass 定义要生成的拾取 Actor、授予的能力以及要添加的标签
+	 * @param ReceivingPawn 接收道具的玩家
+	 *
+	 * @return 返回玩家是否接收道具成功
+	 */
 	UFUNCTION(BlueprintImplementableEvent, Category = "TD|WeaponPickup", meta = (DisplayName = "GiveWeapon"))
 	bool k2_GiveWeapon(TSubclassOf<UTD_InventoryItemDefinition> WeaponItemClass, APawn* ReceivingPawn);
 

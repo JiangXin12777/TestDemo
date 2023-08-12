@@ -12,7 +12,7 @@ class UTD_AbilitySystemComponent;
  */
 UCLASS(Config = Game)
 class ATD_PlayerStateBase
-	: public APlayerState
+	: public AModularPlayerState
 	, public IAbilitySystemInterface
 {
 	GENERATED_BODY()

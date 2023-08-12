@@ -36,15 +36,6 @@ UTD_InventoryItemInstance* UTD_InventoryManagerComponent::AddItemDefinition(TSub
 	return Result;	
 }
 
-void UTD_InventoryManagerComponent::AddItemInstance(UTD_InventoryItemInstance* ItemInstance)
-{
-	InventoryList.AddEntry(ItemInstance);// ~~
-	if (IsUsingRegisteredSubObjectList() && IsReadyForReplication() && ItemInstance)
-	{
-		AddReplicatedSubObject(ItemInstance);
-	}
-}
-
 void UTD_InventoryManagerComponent::RemoveItemInstance(UTD_InventoryItemInstance* ItemInstance)
 {
 	InventoryList.RemoveEntry(ItemInstance);

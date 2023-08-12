@@ -36,7 +36,13 @@ public:
 	UFUNCTION(BlueprintPure, Category=Equipment)
 	TArray<AActor*> GetSpawnedActors() const { return SpawnedActors; }
 
+	/**
+	 * 生成武器 Actor
+	 * @param ActorsToSpawn Actor 的生成参数
+	 */
 	virtual void SpawnEquipmentActors(const TArray<FTD_EquipmentActorToSpawn>& ActorsToSpawn);
+
+	/** 删除所有的武器 Actor  */
 	virtual void DestroyEquipmentActors();
 
 	virtual void OnEquipped();
@@ -59,6 +65,7 @@ private:
 	void OnRep_Instigator();
 
 private:
+	/** 当前武器所归属的插槽实例对象 */
 	UPROPERTY(ReplicatedUsing=OnRep_Instigator)
 	TObjectPtr<UObject> Instigator;
 

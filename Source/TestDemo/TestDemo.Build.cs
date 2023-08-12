@@ -31,6 +31,7 @@ public class TestDemo : ModuleRules
 			"ModularGameplay",
 			"NetCore",
 			"IrisCore",
+			"UMG",
 			"Niagara",
 			"SlateCore"
 		});

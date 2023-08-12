@@ -2,7 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
-#include "GameFramework/Character.h"
+#include "ModularCharacter.h"
 #include "TD_CharacterBase.generated.h"
 
 /**
@@ -10,9 +10,9 @@
  */
 UCLASS(Config = Game)
 class ATD_CharacterBase
-	//: public AModularCharacter
+	: public AModularCharacter
 	//: public AAlsCharacter
-	: public ACharacter
+	//: public ACharacter
 	, public IAbilitySystemInterface
 {
 	GENERATED_BODY()

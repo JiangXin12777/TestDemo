@@ -46,6 +46,7 @@ void UTD_EquipmentInstance::SpawnEquipmentActors(const TArray<FTD_EquipmentActor
 			AttachTarget = Char->GetMesh();
 		}
 
+		// 生成Actor
 		for (const FTD_EquipmentActorToSpawn& SpawnInfo : ActorsToSpawn)
 		{
 			AActor* NewActor = GetWorld()->SpawnActorDeferred<AActor>(SpawnInfo.ActorToSpawn, FTransform::Identity, OwningPawn);
@@ -67,6 +68,8 @@ void UTD_EquipmentInstance::DestroyEquipmentActors()
 			Actor->Destroy();
 		}
 	}
+	
+	SpawnedActors.Empty();
 }
 
 void UTD_EquipmentInstance::OnEquipped()

@@ -9,7 +9,7 @@
  */
 UCLASS(Config = Game)
 class ATD_PlayerControllerBase
-	: public APlayerController
+	: public AModularPlayerController
 {
 	GENERATED_BODY()
 

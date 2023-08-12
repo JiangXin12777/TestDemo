@@ -95,11 +95,6 @@ UTD_InventoryItemInstance* FTD_InventoryList::AddEntry(TSubclassOf<UTD_Inventory
 	return Result;
 }
 
-void FTD_InventoryList::AddEntry(UTD_InventoryItemInstance* Instance)
-{
-	unimplemented();
-}
-
 void FTD_InventoryList::RemoveEntry(UTD_InventoryItemInstance* Instance)
 {
 	//unimplemented();

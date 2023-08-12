@@ -15,12 +15,12 @@ class UInventoryFragment_PickupIcon : public UTD_InventoryItemFragment
 public:
 	UInventoryFragment_PickupIcon();
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Appearance)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TD|Appearance")
 	TObjectPtr<USkeletalMesh> SkeletalMesh;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Appearance)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TD|Appearance")
 	FText DisplayName;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Appearance)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TD|Appearance")
 	FLinearColor PadColor;
 };

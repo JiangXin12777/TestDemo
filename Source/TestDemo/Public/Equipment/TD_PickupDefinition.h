@@ -20,7 +20,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TD|Pickup|Equipment")
 	TSubclassOf<UTD_InventoryItemDefinition> InventoryItemDefinition;
 
-	/** ！ */
+	/** 展示的道具模型 */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TD|Pickup|Mesh")
 	TObjectPtr<UStaticMesh> DisplayMesh;
 
@@ -55,11 +55,7 @@ class  UTD_WeaponPickupDefinition : public UTD_PickupDefinition
 	GENERATED_BODY()
 
 public:
-	/** 设置武器生成器上方显示网格的高度 */
+	/** 武器生成器上展示的 Transform 信息 */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TD|Pickup|Mesh")
-	FVector WeaponMeshOffset;
-
-	/** 武器生成时的缩放 */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "TD|Pickup|Mesh")
-	FVector WeaponMeshScale = FVector(1.0f, 1.0f, 1.0f);
+	FTransform WeaponMeshTransform;
 };

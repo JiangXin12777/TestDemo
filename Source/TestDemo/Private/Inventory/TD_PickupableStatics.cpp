@@ -40,9 +40,9 @@ void UTD_PickupableStatics::AddPickupToInventory(UTD_InventoryManagerComponent* 
 			InventoryComponent->AddItemDefinition(Template.ItemDef, Template.StackCount);
 		}
 
-		for (const FTD_PickupInstance& Instance : PickupInventory.Instances)
-		{
-			InventoryComponent->AddItemInstance(Instance.Item);
-		}
+		// for (const FTD_PickupInstance& Instance : PickupInventory.Instances)
+		// {
+		// 	InventoryComponent->AddItemInstance(Instance.Item);
+		// }
 	}
 }

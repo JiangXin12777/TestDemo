@@ -45,8 +45,7 @@ bool UTD_InventoryItemInstance::HasStatTag(FGameplayTag Tag) const
 	return StatTags.ContainsTag(Tag);
 }
 
-const UTD_InventoryItemFragment* UTD_InventoryItemInstance::FindFragmentByClass(
-	TSubclassOf<UTD_InventoryItemFragment> FragmentClass) const
+const UTD_InventoryItemFragment* UTD_InventoryItemInstance::FindFragmentByClass(TSubclassOf<UTD_InventoryItemFragment> FragmentClass) const
 {
 	if ((ItemDef != nullptr) && (FragmentClass != nullptr))
 	{

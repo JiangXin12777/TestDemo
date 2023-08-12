@@ -13,6 +13,6 @@ class UInventoryFragment_EquippableItem : public UTD_InventoryItemFragment
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, Category=EquippableItem)
+	UPROPERTY(EditAnywhere, Category = "TD|EquippableItem")
 	TSubclassOf<UTD_EquipmentDefinition> EquipmentDefinition;
 };

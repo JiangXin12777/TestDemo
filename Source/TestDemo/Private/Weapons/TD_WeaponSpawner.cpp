@@ -171,7 +171,7 @@ void ATD_WeaponSpawner::AttemptPickUpWeapon_Implementation(APawn* Pawn)
 				PlayPickupEffects();
 				StartCoolDown();
 			}
-		}		
+		}
 	}
 }
 
@@ -220,8 +220,7 @@ void ATD_WeaponSpawner::OnConstruction(const FTransform& Transform)
 	if (WeaponDefinition != nullptr && WeaponDefinition->DisplayMesh != nullptr)
 	{
 		WeaponMesh->SetStaticMesh(WeaponDefinition->DisplayMesh);
-		WeaponMesh->SetRelativeLocation(WeaponDefinition->WeaponMeshOffset);
-		WeaponMesh->SetRelativeScale3D(WeaponDefinition->WeaponMeshScale);
+		WeaponMesh->SetRelativeTransform(WeaponDefinition->WeaponMeshTransform);
 	}	
 }
 

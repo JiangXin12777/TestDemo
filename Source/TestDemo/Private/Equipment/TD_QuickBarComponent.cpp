@@ -23,6 +23,17 @@ void UTD_QuickBarComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 	DOREPLIFETIME(ThisClass, ActiveSlotIndex);
 }
 
+void UTD_QuickBarComponent::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// 初始化道具插槽
+	if (Slots.Num() < NumSlots)
+	{
+		Slots.AddDefaulted(NumSlots - Slots.Num());
+	}
+}
+
 void UTD_QuickBarComponent::CycleActiveSlotForward()
 {
 	if (Slots.Num() < 2)
@@ -61,6 +72,18 @@ void UTD_QuickBarComponent::CycleActiveSlotBackward()
 			return;
 		}
 	} while (NewIndex != OldIndex);
+}
+
+void UTD_QuickBarComponent::SetActiveSlotItem(UTD_InventoryItemInstance* InItem)
+{
+	if (!InItem || !Slots.Contains(InItem))
+		return;
+
+	const int32 TempIndex =  Slots.IndexOfByKey(InItem);
+	if (TempIndex != INDEX_NONE)
+	{
+		SetActiveSlotIndex(TempIndex);
+	}
 }
 
 const TArray<UTD_InventoryItemInstance*>& UTD_QuickBarComponent::GetSlots() const
@@ -124,11 +147,6 @@ UTD_InventoryItemInstance* UTD_QuickBarComponent::RemoveItemFromSlot(int32 SlotI
 	return Result;
 }
 
-void UTD_QuickBarComponent::BeginPlay()
-{
-	Super::BeginPlay();
-}
-
 void UTD_QuickBarComponent::UnequipItemInSlot()
 {
 	if (UTD_EquipmentManagerComponent* EquipmentManager = FindEquipmentManager())
@@ -146,8 +164,10 @@ void UTD_QuickBarComponent::EquipItemInSlot()
 	check(Slots.IsValidIndex(ActiveSlotIndex));
 	check(EquippedItem == nullptr);
 
+	// 拿到库存物品实例
 	if (UTD_InventoryItemInstance* SlotItem = Slots[ActiveSlotIndex])
 	{
+		// 获取其可装备能力配置，如果为空则其不可以作为玩家的手持道具
 		if (const UInventoryFragment_EquippableItem* EquipInfo = SlotItem->FindFragmentByClass<UInventoryFragment_EquippableItem>())
 		{
 			TSubclassOf<UTD_EquipmentDefinition> EquipDef = EquipInfo->EquipmentDefinition;

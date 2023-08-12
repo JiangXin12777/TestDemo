@@ -12,12 +12,12 @@ class UInventoryFragment_QuickBarIcon : public UTD_InventoryItemFragment
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Appearance)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TD|Appearance")
 	FSlateBrush Brush;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Appearance)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TD|Appearance")
 	FSlateBrush AmmoBrush;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Appearance)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TD|Appearance")
 	FText DisplayNameWhenEquipped;
 };

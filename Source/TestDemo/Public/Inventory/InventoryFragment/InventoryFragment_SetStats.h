@@ -14,7 +14,7 @@ class UInventoryFragment_SetStats : public UTD_InventoryItemFragment
 	GENERATED_BODY()
 
 protected:
-	UPROPERTY(EditDefaultsOnly, Category=Equipment)
+	UPROPERTY(EditDefaultsOnly, Category = "TD|Equipment")
 	TMap<FGameplayTag, int32> InitialItemStats;
 
 public:

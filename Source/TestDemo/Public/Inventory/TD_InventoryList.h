@@ -78,19 +78,25 @@ public:
 	void PostReplicatedChange(const TArrayView<int32> ChangedIndices, int32 FinalSize);
 	//~End of FFastArraySerializer contract
 
+	/** 网络数据同步 */
 	bool NetDeltaSerialize(FNetDeltaSerializeInfo& DeltaParms)
 	{
 		return FFastArraySerializer::FastArrayDeltaSerialize<FTD_InventoryEntry, FTD_InventoryList>(Entries, DeltaParms, *this);
 	}
 
-	/** 获取当前库存中的所有的物品实例对象 */
+	/**
+	 * 获取当前库存中的所有的物品实例对象
+	 */
 	TArray<UTD_InventoryItemInstance*> GetAllItems() const;
 
-	/** 向库存列表中添加一个物品 */
+	/**
+	 * 向库存列表中添加一个物品
+	 */
 	UTD_InventoryItemInstance* AddEntry(TSubclassOf<UTD_InventoryItemDefinition> ItemClass, int32 StackCount);
-	void AddEntry(UTD_InventoryItemInstance* Instance);
 
-	/** 移除列表中的物品 */
+	/**
+	 * 移除列表中的物品
+	 */
 	void RemoveEntry(UTD_InventoryItemInstance* Instance);
 
 private:
@@ -99,7 +105,6 @@ private:
 private:
 	friend UTD_InventoryManagerComponent;
 
-private:
 	/** 需要复制的物品列表 */
 	UPROPERTY()
 	TArray<FTD_InventoryEntry> Entries;

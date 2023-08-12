@@ -36,15 +36,18 @@
 		},
 		{
 			"Name": "TargetSystem",
-			"Enabled": true
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/6bd21ce58d6e4cb295f71bd370233f53"
 		},
 		{
 			"Name": "NinjaInput",
-			"Enabled": true
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/a754117f71cd46c68394f2c452318a04"
 		},
 		{
 			"Name": "ALS",
-			"Enabled": true
+			"Enabled": true,
+			"MarketplaceURL": "https://www.unrealengine.com/marketplace/en-US/product/advanced-locomotion-system-v1"
 		},
 		{
 			"Name": "AnimationLocomotionLibrary",
@@ -53,6 +56,15 @@
 		{
 			"Name": "AnimationWarping",
 			"Enabled": true
+		},
+		{
+			"Name": "TD_GameFeature",
+			"Enabled": true
+		},
+		{
+			"Name": "GameplayTagMacroGenerator",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/7fcb315a0984496092e5ee3bc48b2606"
 		}
 	]
 }
