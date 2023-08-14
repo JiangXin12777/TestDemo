@@ -75,12 +75,6 @@ protected:
 	//void GSApplyCost(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo& ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo) const;
 	//virtual void GSApplyCost_Implementation(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo& ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo) const {};
 
-	//UFUNCTION(BlueprintCallable, Category = "TD|Ability")
-	//virtual void SetHUDReticle(TSubclassOf<class UGSHUDReticle> ReticleClass);
-
-	//UFUNCTION(BlueprintCallable, Category = "TD|Ability")
-	//virtual void ResetHUDReticle();
-
 	// Sends TargetData from the client to the Server and creates a new Prediction Window
 	UFUNCTION(BlueprintCallable, Category = "TD|Ability")
 	virtual void SendTargetDataToServer(const FGameplayAbilityTargetDataHandle& TargetData);

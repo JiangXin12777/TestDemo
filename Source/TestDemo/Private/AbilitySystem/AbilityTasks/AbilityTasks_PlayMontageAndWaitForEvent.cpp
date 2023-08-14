@@ -251,6 +251,6 @@ void UAbilityTasks_PlayMontageAndWaitForEvent::OnDamageGameplayEvent(FGameplayTa
 		FGameplayEventData EventData = *Payload;
 		EventData.EventTag = InGameplayTag;
 
-		DamageEventReceived.Broadcast(InGameplayTag, EventData);
+		OnDamageEventReceived.Broadcast(InGameplayTag, EventData);
 	}
 }

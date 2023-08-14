@@ -58,7 +58,7 @@ public:
 	FMontageWaitSimpleForDamageEventDelegate	OnCancelled;
 
 	UPROPERTY(BlueprintAssignable)
-	FMontageWaitSimpleForDamageEventDelegate	DamageEventReceived;
+	FMontageWaitSimpleForDamageEventDelegate	OnDamageEventReceived;
 
 protected:
 	// ~Begin UObject Interface

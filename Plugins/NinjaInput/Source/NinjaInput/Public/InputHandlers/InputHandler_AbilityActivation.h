@@ -9,7 +9,7 @@
 class UGameplayAbility;
 
 /**
- * Base input handler for ability activations. 
+ * 用于能力激活的基本输入处理程序。
  */
 UCLASS(Abstract)
 class NINJAINPUT_API UInputHandler_AbilityActivation : public UNinjaInputHandler
@@ -24,83 +24,71 @@ public:
 protected:
 
     /**
-     * Determines if the activation should be toggled.
+     * 确定是否应切换激活。
      *
-     * This means the first successful trigger will activate the ability and the next one will check if the
-     * ability is active first (with an optional query test), and if so, it will interrupt the ability.
+     * 这意味着第一个成功的触发将激活该能力，下一个将首先检查该能力是否处于活动状态（带有可选的查询测试），如果是，则会中断该能力。
      */
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability Activation")
     bool bToggledActivation;
 
     /**
-     * If set to true, this handler will send a Gameplay Event on additional inputs, made while the ability is active.
+     * 如果设置为 true，此处理程序将在该功能处于活动状态时在其他输入上发送游戏事件。
      *
-     * Activation must be determined by child classes that will have their own activation strategies (i.e. Class, Tags
-     * or Input ID) and must use these same strategies to determine if an ability is active or not. 
+     * 激活必须由具有自己的激活策略（即类、标签或输入 ID）的子类确定，并且必须使用这些相同的策略来确定能力是否处于活动状态。
      */
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability Activation")
     bool bSendEventIfActive;
 
     /**
-     * If set to true, the event will be triggered on locally.
+     * 如果设置为 true，该事件将在本地触发。
      *
-     * If the "Trigger Event On Server" flag is enabled and the Input Owner is both locally controlled and authoritative,
-     * the event is guaranteed to not be triggered twice.
+     * 如果启用了“在服务器上触发事件”标志并且输入所有者既受本地控制又具有权威，则保证事件不会被触发两次。
      */    
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability Activation", meta = (EditCondition = "bSendEventIfActive", EditConditionHides))
     bool bTriggerEventLocally;
 
     /**
-     * If set to true, the event will be triggered on the server (authoritative) version.
+     * 如果设置为true，该事件将在服务器（权威）版本上触发。
      *
-     * If the "Trigger Event Locally" flag is enabled and the Input Owner is both locally controlled and authoritative,
-     * the event is guaranteed to not be triggered twice.
+     * 如果启用“本地触发事件”标志并且输入所有者既受本地控制又具有权威，则保证事件不会被触发两次。
      */
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability Activation", meta = (EditCondition = "bSendEventIfActive", EditConditionHides))
     bool bTriggerEventOnServer;
     
     /**
-     * Gameplay Tag used to trigger a Gameplay Event, if there is an activation attempt, while the ability is active.
+     * 游戏标签用于在能力处于活动状态时触发游戏事件（如果有激活尝试）。
      *
-     * This Gameplay Event can be tracked by the active ability or any other ability that is already active or can
-     * be activated by a Gameplay State. A common use-case for this is a Combo Attack.
+     * 该游戏事件可以通过活动能力或任何其他已经处于活动状态或可以由游戏状态激活的能力来跟踪。一个常见的用例是组合攻击。
      */
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability Activation", meta = (EditCondition = "bSendEventIfActive", EditConditionHides))
     FGameplayTag ActiveEventTag;
 
-    // -- Begin Input Handler implementation
-    virtual void HandleTriggeredEvent_Implementation(UNinjaInputManagerComponent* Manager,
-        const FInputActionValue& Value, const UInputAction* InputAction) const override;
-
-    virtual void HandleCompletedEvent_Implementation(UNinjaInputManagerComponent* Manager,
-        const FInputActionValue& Value, const UInputAction* InputAction) const override;
-
-    virtual void HandleCancelledEvent_Implementation(UNinjaInputManagerComponent* Manager,
-        const FInputActionValue& Value, const UInputAction* InputAction) const override;
-    // -- End Input Handler implementation
+protected:
+    // ~Begin UNinjaInputHandler Interface
+    virtual void HandleTriggeredEvent_Implementation(UNinjaInputManagerComponent* Manager, const FInputActionValue& Value, const UInputAction* InputAction) const override;
+    virtual void HandleCompletedEvent_Implementation(UNinjaInputManagerComponent* Manager, const FInputActionValue& Value, const UInputAction* InputAction) const override;
+    virtual void HandleCancelledEvent_Implementation(UNinjaInputManagerComponent* Manager, const FInputActionValue& Value, const UInputAction* InputAction) const override;
+    // ~End UNinjaInputHandler Interface
 
     /**
-     * Allows proper handling of abilities that are already handled, based on the current setup.
+     * 允许根据当前设置正确处理已处理的能力。
      *
-     * A reason for you to override this method is to potentially avoid iterating over the abilities
-     * if there's not reason to do so. For example, by default, both "Event" and Toggle "checks are
-     * taken into consideration. If that scenario can never happen in conjunction for you system,
-     * then it may be worth it to adjust this functionality to fit your needs.
+     * 您重写此方法的一个原因是，如果没有理由这样做，可能会避免迭代功能。例如，默认情况下，“事件”和“切换”检查都会被考虑在内。
+     * 如果您的系统永远不会发生这种情况，那么调整此功能以满足您的需求可能是值得的。
      *
-     * @param Manager           Input Manager that has invoked this handler. Must be valid.
-     * @param Value             Original value received from the Enhanced Input System.
-     * @param InputAction       Original Action that is triggering this activation.
-     * @return                  True if this method handled the ability. If false, then handling is pending.
+     * @param Manager           已调用此处理程序的输入管理器。必须有效。
+     * @param Value             从增强输入系统收到的原始值。
+     * @param InputAction       触发此激活的原始操作。
+     * @return                  如果此方法处理该能力，则为 true。如果为 false，则处理待处理。
      */
-    virtual bool TryHandleActiveAbility(UNinjaInputManagerComponent* Manager, const FInputActionValue& Value,
-        const UInputAction* InputAction) const;
+    virtual bool TryHandleActiveAbility(UNinjaInputManagerComponent* Manager, const FInputActionValue& Value, const UInputAction* InputAction) const;
 
     /**
-     * Concrete implementation that can check if an ability is active based on a certain criteria.
+     * 具体实现可以根据特定标准检查某个能力是否处于活动状态。
      *
-     * Each subclass must implement this method properly, without calling the base implementation (super).
+     * 每个子类必须正确实现此方法，而不调用基本实现（super）。
      * 
-     * @param Manager           Input Manager that has invoked this handler. Must be valid.
+     * @param Manager           已调用此处理程序的输入管理器。必须有效。
      * @return                  True if an Ability is active.
      */
     virtual bool HasActiveAbility(UNinjaInputManagerComponent* Manager) const;
