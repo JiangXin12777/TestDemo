@@ -2,9 +2,9 @@
 
 namespace TD
 {
-	UE_DEFINE_GAMEPLAY_TAG(Attack_Sword_LightAttack, "TD.Attack.Sword.LightAttack");
-	UE_DEFINE_GAMEPLAY_TAG(Attack_Sword_HeavyAttack, "TD.Attack.Sword.HeavyAttack");
-	UE_DEFINE_GAMEPLAY_TAG(Attack_Sword_AttackBlock, "TD.Attack.Sword.AttackBlock");
+	UE_DEFINE_GAMEPLAY_TAG(Attack_LightAttack, "TD.Attack.LightAttack");
+	UE_DEFINE_GAMEPLAY_TAG(Attack_HeavyAttack, "TD.Attack.HeavyAttack");
+	UE_DEFINE_GAMEPLAY_TAG(Attack_AttackBlock, "TD.Attack.AttackBlock");
 	
 	UE_DEFINE_GAMEPLAY_TAG(Inventory_Message_StackChanged, "TD.Inventory.Message.StackChanged");
 	//UE_DEFINE_GAMEPLAY_TAG_STATIC(Inventory_Message_StackChanged, "TD.Inventory.Message.StackChanged");

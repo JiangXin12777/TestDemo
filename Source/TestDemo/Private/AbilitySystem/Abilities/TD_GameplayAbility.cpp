@@ -46,23 +46,6 @@ void UTD_GameplayAbility::PreActivate(FGameplayAbilitySpecHandle AbilityHandle,
 	FOnGameplayAbilityEnded::FDelegate* OnGameplayAbilityEndedDelegate, const FGameplayEventData* TriggerEventData)
 {
 	Super::PreActivate(AbilityHandle, ActorInfo, ActivationInfo, OnGameplayAbilityEndedDelegate, TriggerEventData);
-
-	UTD_AbilitySystemComponent* FuAbilitySystem{Cast<UTD_AbilitySystemComponent>(ActorInfo->AbilitySystemComponent)};
-
-	if (bIsBlockingOtherAbilities && ensure(IsValid(FuAbilitySystem)))
-	{
-		FuAbilitySystem->BlockAbilitiesWithoutTags(BlockAbilitiesWithoutTag);
-	}
-
-	if (CancelAbilitiesWithoutTag.IsValid())
-	{
-		ActorInfo->AbilitySystemComponent->CancelAbilities(nullptr, &CancelAbilitiesWithoutTag, this);
-	}
-
-	if (RemoveAbilitiesWithTag.IsValid())
-	{
-		//UFuAbilityUtility::RemoveAbilitiesWithAnyTags(ActorInfo->AbilitySystemComponent.Get(), RemoveAbilitiesWithTag, AbilityHandle);
-	}
 }
 
 FGameplayAbilityTargetDataHandle UTD_GameplayAbility::MakeGameplayAbilityTargetDataHandleFromActorArray(const TArray<AActor*> TargetActors)

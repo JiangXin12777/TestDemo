@@ -5,6 +5,7 @@
 #include "TD_EquipmentDefinition.generated.h"
 
 class UTD_EquipmentInstance;
+class UTD_AbilitySet;
 
 /**
  * 装备定义
@@ -21,8 +22,8 @@ public:
 	TSubclassOf<UTD_EquipmentInstance> InstanceType;
 
 	// Gameplay ability sets to grant when this is equipped
-	//UPROPERTY(EditDefaultsOnly, Category=Equipment)
-	//TArray<TObjectPtr<const UTD_AbilitySet>> AbilitySetsToGrant;
+	UPROPERTY(EditDefaultsOnly, Category=Equipment)
+	TArray<TObjectPtr<const UTD_AbilitySet>> AbilitySetsToGrant;
 
 	// Actors to spawn on the pawn when this is equipped
 	UPROPERTY(EditDefaultsOnly, Category=Equipment)

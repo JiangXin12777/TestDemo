@@ -91,13 +91,4 @@ protected:
 	/** 告诉一种能力一旦被授予就立即激活。用于被动能力和强加于他人的能力。 */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "TD|Ability")
 	bool bActivateAbilityOnGranted;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TD|Ability")
-	FGameplayTagContainer RemoveAbilitiesWithTag;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TD|Ability")
-	FGameplayTagContainer CancelAbilitiesWithoutTag;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "TD|Ability")
-	FGameplayTagContainer BlockAbilitiesWithoutTag;
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "TD_EquipmentList.h"
 #include "Components/ControllerComponent.h"
 #include "TD_QuickBarComponent.generated.h"
 

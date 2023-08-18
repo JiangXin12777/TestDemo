@@ -6,6 +6,7 @@
 UInputHandle_ActivateAbilitiesByTag::UInputHandle_ActivateAbilitiesByTag()
 	: Super()
 {
+	TriggerEvents.Add(ETriggerEvent::Started);
 }
 
 void UInputHandle_ActivateAbilitiesByTag::HandleStartedEvent_Implementation(UNinjaInputManagerComponent* Manager,
@@ -14,15 +15,9 @@ void UInputHandle_ActivateAbilitiesByTag::HandleStartedEvent_Implementation(UNin
 	TryActivateAbilitiesByTag(Manager);
 }
 
-bool UInputHandle_ActivateAbilitiesByTag::CanActivateAbilities(UNinjaInputManagerComponent* Manager) const
-{
-	return !HasAnyTags(Manager, BlockTagContainer);
-}
-
 void UInputHandle_ActivateAbilitiesByTag::TryActivateAbilitiesByTag(UNinjaInputManagerComponent* Manager) const
 {
-	if (!IsValid(Manager) || !CanActivateAbilities(Manager))
-		return;
+	check(Manager);
 	
 	if (UAbilitySystemComponent* ASC = Cast<UAbilitySystemComponent>(Manager->GetAbilitySystemComponent()))
 	{

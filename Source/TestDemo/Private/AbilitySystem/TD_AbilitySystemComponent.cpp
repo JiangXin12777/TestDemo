@@ -37,14 +37,26 @@ bool UTD_AbilitySystemComponent::TryBatchRPCTryActivateAbility(FGameplayAbilityS
 	return AbilityActivated;
 }
 
-void UTD_AbilitySystemComponent::BlockAbilitiesWithoutTags(const FGameplayTagContainer& Tags)
+void UTD_AbilitySystemComponent::GetActiveAbilitiesWithTags(const FGameplayTagContainer& GameplayTagContainer,
+	TArray<UTD_GameplayAbility*>& ActiveAbilities) const
 {
-	BlockedAbilityWithoutTags.UpdateTagCount(Tags, 1);
-}
+	TArray<FGameplayAbilitySpec*> AbilitiesToActivate;
+	GetActivatableGameplayAbilitySpecsByAllMatchingTags(GameplayTagContainer, AbilitiesToActivate, false);
 
-void UTD_AbilitySystemComponent::UnBlockAbilitiesWithoutTags(const FGameplayTagContainer& Tags)
-{
-	BlockedAbilityWithoutTags.UpdateTagCount(Tags, -1);
+	// 迭代所有能力规格的列表
+	for (FGameplayAbilitySpec* Spec : AbilitiesToActivate)
+	{
+		// 迭代此能力规范的所有实例
+		TArray<UGameplayAbility*> AbilityInstances = Spec->GetAbilityInstances();
+
+		for (UGameplayAbility* ActiveAbility : AbilityInstances)
+		{
+			if (UTD_GameplayAbility* GA =Cast<UTD_GameplayAbility>(ActiveAbility))
+			{
+				ActiveAbilities.Add(GA);
+			}
+		}
+	}
 }
 
 bool UTD_AbilitySystemComponent::ShouldDoServerAbilityRPCBatch() const
@@ -64,7 +76,7 @@ void UTD_AbilitySystemComponent::OnRemoveAbility(FGameplayAbilitySpec& AbilitySp
 
 bool UTD_AbilitySystemComponent::AreAbilityTagsBlocked(const FGameplayTagContainer& Tags) const
 {
-	return Super::AreAbilityTagsBlocked(Tags) || (BlockedAbilityWithoutTags.GetExplicitGameplayTags().IsValid() && !Tags.HasAny(BlockedAbilityWithoutTags.GetExplicitGameplayTags()));
+	return Super::AreAbilityTagsBlocked(Tags);
 }
 
 void UTD_AbilitySystemComponent::AbilityLocalInputPressed(int32 InputId)

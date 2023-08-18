@@ -1,7 +1,7 @@
 #include "Weapons/TD_WeaponActor.h"
 
+#include "Component/DidItHit/DidItHitActorComponent.h"
 #include "Components/ArrowComponent.h"
-#include "DidItHit/DidItHitActorComponent.h"
 
 ATD_WeaponActor::ATD_WeaponActor(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)

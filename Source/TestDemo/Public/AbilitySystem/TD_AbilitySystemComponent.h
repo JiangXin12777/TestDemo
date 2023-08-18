@@ -3,6 +3,8 @@
 #include "AbilitySystemComponent.h"
 #include "TD_AbilitySystemComponent.generated.h"
 
+class UTD_GameplayAbility;
+
 /**
  * 技能组件基类
  */
@@ -32,9 +34,15 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Abilities")
 	virtual bool TryBatchRPCTryActivateAbility(FGameplayAbilitySpecHandle InAbilityHandle, bool EndAbilityImmediately);
 
-	void BlockAbilitiesWithoutTags(const FGameplayTagContainer& Tags);
+	/**
+	 * 返回与标签匹配的当前活动能力实例的列表
+	 *
+	 * @param GameplayTagContainer 需要匹配那些标签
+	 * @param ActiveAbilities 返回当前激活的 GA
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Abilities")
+	void GetActiveAbilitiesWithTags(const FGameplayTagContainer& GameplayTagContainer, TArray<UTD_GameplayAbility*>& ActiveAbilities) const;
 
-	void UnBlockAbilitiesWithoutTags(const FGameplayTagContainer& Tags);
 
 protected:
 	// ~Begin UAbilitySystemComponent Interface
@@ -44,7 +52,4 @@ protected:
 	virtual bool AreAbilityTagsBlocked(const FGameplayTagContainer& Tags) const override;
 	virtual void AbilityLocalInputPressed(int32 InputId) override;
 	// ~End UAbilitySystemComponent Interface
-
-protected:
-	FGameplayTagCountContainer BlockedAbilityWithoutTags;
 };

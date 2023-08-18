@@ -47,8 +47,8 @@ public:
 	}
 	
 	/** 返回给定类型的所有装备实例，如果没有找到，则返回空数组 */
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-   TArray<UTD_EquipmentInstance*> GetEquipmentInstancesOfType(TSubclassOf<UTD_EquipmentInstance> InstanceType) const;
+	UFUNCTION(BlueprintPure)
+	TArray<UTD_EquipmentInstance*> GetEquipmentInstancesOfType(TSubclassOf<UTD_EquipmentInstance> InstanceType) const;
 
 private:
 	UPROPERTY(Replicated)

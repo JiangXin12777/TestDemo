@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystem/AbilitySet/TD_AbilitySetHandle.h"
 #include "Net/Serialization/FastArraySerializer.h"
 #include "TD_EquipmentList.generated.h"
 
@@ -27,7 +28,7 @@ private:
 	friend FTD_EquipmentList;
 	friend UTD_EquipmentManagerComponent;
 
-	/** 所装备的装备等级 */
+	/** 装备定义 */
 	UPROPERTY()
 	TSubclassOf<UTD_EquipmentDefinition> EquipmentDefinition;
 
@@ -36,8 +37,8 @@ private:
 	TObjectPtr<UTD_EquipmentInstance> Instance = nullptr;
 
 	// Authority-only list of granted handles
-	//UPROPERTY(NotReplicated)
-	//FLyraAbilitySet_GrantedHandles GrantedHandles;
+	UPROPERTY(NotReplicated)
+	FTD_AbilitySet_GrantedHandles GrantedHandles;
 };
 
 /**

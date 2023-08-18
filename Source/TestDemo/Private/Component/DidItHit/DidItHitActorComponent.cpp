@@ -5,7 +5,7 @@
 'I could do that, but I won't,' ?
 which is just another way of saying that you can't.*/
 
-#include "DidItHit/DidItHitActorComponent.h"
+#include "Component/DidItHit/DidItHitActorComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 // Sets default values for this component's properties

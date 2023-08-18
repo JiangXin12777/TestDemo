@@ -1,5 +1,8 @@
 #include "Equipment/TD_EquipmentList.h"
 
+#include "AbilitySystemGlobals.h"
+#include "AbilitySystem/TD_AbilitySystemComponent.h"
+#include "AbilitySystem/AbilitySet/TD_AbilitySet.h"
 #include "Equipment/TD_EquipmentDefinition.h"
 #include "Equipment/TD_EquipmentInstance.h"
 
@@ -43,6 +46,7 @@ void FTD_EquipmentList::PostReplicatedChange(const TArrayView<int32> ChangedIndi
 
 UTD_EquipmentInstance* FTD_EquipmentList::AddEntry(TSubclassOf<UTD_EquipmentDefinition> EquipmentDefinition)
 {
+	// 将武器添加到装备列表中
 	UTD_EquipmentInstance* Result = nullptr;
 
 	check(EquipmentDefinition != nullptr);
@@ -62,17 +66,18 @@ UTD_EquipmentInstance* FTD_EquipmentList::AddEntry(TSubclassOf<UTD_EquipmentDefi
 	NewEntry.Instance = NewObject<UTD_EquipmentInstance>(OwnerComponent->GetOwner(), InstanceType);  //@TODO: Using the actor instead of component as the outer due to UE-127172
 	Result = NewEntry.Instance;
 
-	// if (UTD_AbilitySystemComponent* ASC = GetAbilitySystemComponent())
-	// {
-	// 	for (TObjectPtr<const UTD_AbilitySet> AbilitySet : EquipmentCDO->AbilitySetsToGrant)
-	// 	{
-	// 		AbilitySet->GiveToAbilitySystem(ASC, /*inout*/ &NewEntry.GrantedHandles, Result);
-	// 	}
-	// }
-	// else
-	// {
-	// 	//@TODO: Warning logging?
-	// }
+	// 在装备武器的同时，进行能力的注册
+	if (UTD_AbilitySystemComponent* ASC = GetAbilitySystemComponent())
+	{
+		for (TObjectPtr<const UTD_AbilitySet> AbilitySet : EquipmentCDO->AbilitySetsToGrant)
+		{
+			AbilitySet->GiveToAbilitySystem(ASC, &NewEntry.GrantedHandles, Result);
+		}
+	}
+	else
+	{
+		//@TODO: Warning logging?
+	}
 
 	Result->SpawnEquipmentActors(EquipmentCDO->ActorsToSpawn);
 
@@ -89,10 +94,11 @@ void FTD_EquipmentList::RemoveEntry(UTD_EquipmentInstance* Instance)
 		FTD_AppliedEquipmentEntry& Entry = *EntryIt;
 		if (Entry.Instance == Instance)
 		{
-			// if (UTD_AbilitySystemComponent* ASC = GetAbilitySystemComponent())
-			// {
-			// 	Entry.GrantedHandles.TakeFromAbilitySystem(ASC);
-			// }
+			// 卸载装备时，移除相关的能力
+			if (UTD_AbilitySystemComponent* ASC = GetAbilitySystemComponent())
+			{
+				Entry.GrantedHandles.TakeFromAbilitySystem(ASC);
+			}
 
 			Instance->DestroyEquipmentActors();
 			
@@ -105,5 +111,7 @@ void FTD_EquipmentList::RemoveEntry(UTD_EquipmentInstance* Instance)
 
 UTD_AbilitySystemComponent* FTD_EquipmentList::GetAbilitySystemComponent() const
 {
-	return nullptr;
+	check(OwnerComponent);
+	AActor* OwningActor = OwnerComponent->GetOwner();
+	return Cast<UTD_AbilitySystemComponent>(UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(OwningActor));
 }
