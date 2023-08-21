@@ -23,7 +23,7 @@ public:
 	UAbilitySystemComponent* GetAbilitySystemComponent() const;
 
 	template <class T>
-	T* GetAbilitySystemComponent() const
+	FORCEINLINE T* GetAbilitySystemComponent() const
 	{
 		return CastChecked<T>(GetAbilitySystemComponent());
 	}

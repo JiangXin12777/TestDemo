@@ -10,7 +10,7 @@ UTD_FightComponent::UTD_FightComponent(const FObjectInitializer& ObjectInitializ
 	SetIsReplicatedByDefault(true);
 }
 
-inline UAbilitySystemComponent* UTD_FightComponent::GetAbilitySystemComponent() const
+UAbilitySystemComponent* UTD_FightComponent::GetAbilitySystemComponent() const
 {
 	check(GetOwner());
 	return UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(GetOwner());
@@ -41,7 +41,7 @@ bool UTD_FightComponent::IsActiveAbilitiesWithTags(FGameplayTagContainer Ability
 {
 	TArray<UTD_GameplayAbility*> ActiveAbilities;
 	GetActiveAbilitiesWithTags(AbilityTags, ActiveAbilities);
-	return ActiveAbilities.Num();
+	return ActiveAbilities.Num() > 0;
 }
 
 void UTD_FightComponent::GetActiveAbilitiesWithTags(FGameplayTagContainer AbilityTags, TArray<UTD_GameplayAbility*>& ActiveAbilities) const
