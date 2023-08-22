@@ -12,17 +12,17 @@ ATD_PlayerControllerBase::ATD_PlayerControllerBase(const FObjectInitializer& Obj
 	WeaponStateComponent = CreateDefaultSubobject<UTD_WeaponStateComponent>(TEXT("WeaponStateComponent"));
 }
 
-inline UTD_InventoryManagerComponent* ATD_PlayerControllerBase::GetInventoryManagerComponent() const
+UTD_InventoryManagerComponent* ATD_PlayerControllerBase::GetInventoryManagerComponent() const
 {
 	return InventoryManagerComponent;
 }
 
-inline UTD_QuickBarComponent* ATD_PlayerControllerBase::GetQuickBarComponent() const
+UTD_QuickBarComponent* ATD_PlayerControllerBase::GetQuickBarComponent() const
 {
 	return QuickBarComponent;
 }
 
-inline UTD_WeaponStateComponent* ATD_PlayerControllerBase::GetWeaponStateComponent() const
+UTD_WeaponStateComponent* ATD_PlayerControllerBase::GetWeaponStateComponent() const
 {
 	return WeaponStateComponent;
 }

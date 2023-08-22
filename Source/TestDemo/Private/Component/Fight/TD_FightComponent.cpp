@@ -3,6 +3,8 @@
 #include "AbilitySystemComponent.h"
 #include "AbilitySystemGlobals.h"
 #include "AbilitySystem/TD_AbilitySystemComponent.h"
+#include "GameplayTag/TD_GameplayTags.h"
+#include "Log/TD_Log.h"
 
 UTD_FightComponent::UTD_FightComponent(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -16,42 +18,67 @@ UAbilitySystemComponent* UTD_FightComponent::GetAbilitySystemComponent() const
 	return UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(GetOwner());
 }
 
-void UTD_FightComponent::TryAttack(FGameplayTagContainer AbilityTags)
+void UTD_FightComponent::TryComboAttack(TSubclassOf<UGameplayAbility> InAbilityClass)
 {
-	if (IsActiveAbilitiesWithTags(AbilityTags))
+	if (InAbilityClass)
 	{
+		bool bFirstAttack = false;
+	
+		if (!IsActiveAbilitiesWithClass(InAbilityClass) || ComboExamine.ComboClass != InAbilityClass)
+		{
+			ComboExamine.Reset();
+			ComboExamine.ComboClass = InAbilityClass;
 		
+			bFirstAttack = true;
+		}
+	
+		ComboExamine.Press();
+
+		if (bFirstAttack)
+		{
+			DoAttack(InAbilityClass);
+		}
 	}
 	else
 	{
-		
+		UE_LOG(TD_GameplayAbility, Warning, TEXT("TryComboAttack:: InAbilityClass is null."));
 	}
+}
+
+void UTD_FightComponent::DoAttack(TSubclassOf<UGameplayAbility> InAbilityClass) const
+{
+	if (UAbilitySystemComponent* ASC = GetAbilitySystemComponent())
+	{
+		ASC->TryActivateAbilityByClass(InAbilityClass);
+	}
+}
+
+void UTD_FightComponent::Released()
+{
+	ComboExamine.Released();
 }
 
 void UTD_FightComponent::TryBlock()
 {
+	if (UTD_AbilitySystemComponent* ASC = GetAbilitySystemComponent<UTD_AbilitySystemComponent>())
+	{
+		ASC->TryActivateAbilitiesByTag(FGameplayTagContainer(TD::Attack_AttackBlock));
+	}
 }
 
 void UTD_FightComponent::TrySprint()
 {
-	
-}
-
-bool UTD_FightComponent::IsActiveAbilitiesWithTags(FGameplayTagContainer AbilityTags) const
-{
-	TArray<UTD_GameplayAbility*> ActiveAbilities;
-	GetActiveAbilitiesWithTags(AbilityTags, ActiveAbilities);
-	return ActiveAbilities.Num() > 0;
-}
-
-void UTD_FightComponent::GetActiveAbilitiesWithTags(FGameplayTagContainer AbilityTags, TArray<UTD_GameplayAbility*>& ActiveAbilities) const
-{
 	if (UTD_AbilitySystemComponent* ASC = GetAbilitySystemComponent<UTD_AbilitySystemComponent>())
 	{
-		ASC->GetActiveAbilitiesWithTags(AbilityTags, ActiveAbilities);
+		ASC->TryActivateAbilitiesByTag(FGameplayTagContainer(TD::Attack_Sprint));
 	}
 }
 
-void UTD_FightComponent::DoAttack(FGameplayTagContainer AbilityTags)
+bool UTD_FightComponent::IsActiveAbilitiesWithClass(TSubclassOf<UGameplayAbility> InAbilityClass) const
 {
+	if (UTD_AbilitySystemComponent* ASC = GetAbilitySystemComponent<UTD_AbilitySystemComponent>())
+	{
+		return ASC->IsActiveAbilitiesWithClass(InAbilityClass);
+	}
+	return false;
 }

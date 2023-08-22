@@ -62,6 +62,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category="TD|QuickBar")
 	UTD_InventoryItemInstance* GetActiveSlotItem() const;
 
+	/** 获取当前激活的可装备实例 */
+	UFUNCTION(BlueprintCallable, Category="TD|QuickBar")
+	UTD_EquipmentInstance* GetActiveEquippedItem() const;
+
 	/** 获取下一个空闲的道具插槽 */
 	UFUNCTION(BlueprintCallable, Category="TD|QuickBar")
 	int32 GetNextFreeItemSlot() const;

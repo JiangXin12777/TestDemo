@@ -17,22 +17,22 @@ ATD_CharacterBase::ATD_CharacterBase(const FObjectInitializer& ObjectInitializer
 	FightComponent = CreateDefaultSubobject<UTD_FightComponent>(TEXT("FightComponent"));
 }
 
-inline UTD_AbilitySystemComponent* ATD_CharacterBase::GetTDAbilitySystemComponent() const
+UTD_AbilitySystemComponent* ATD_CharacterBase::GetTDAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
 }
 
-inline UTD_AttributeSet* ATD_CharacterBase::GetTDAttributeSet() const
+UTD_AttributeSet* ATD_CharacterBase::GetTDAttributeSet() const
 {
 	return AttributeSet;
 }
 
-inline UTD_EquipmentManagerComponent* ATD_CharacterBase::GetEquipmentManagerComponent() const
+UTD_EquipmentManagerComponent* ATD_CharacterBase::GetEquipmentManagerComponent() const
 {
 	return EquipmentManagerComponent;
 }
 
-inline UTD_InventoryManagerComponent* ATD_CharacterBase::GetInventoryManagerComponent() const
+UTD_InventoryManagerComponent* ATD_CharacterBase::GetInventoryManagerComponent() const
 {
 	if (ATD_PlayerControllerBase* PC = Cast<ATD_PlayerControllerBase>(GetController()))
 	{
@@ -41,7 +41,7 @@ inline UTD_InventoryManagerComponent* ATD_CharacterBase::GetInventoryManagerComp
 	return nullptr;
 }
 
-inline UTD_QuickBarComponent* ATD_CharacterBase::GetQuickBarComponent() const
+UTD_QuickBarComponent* ATD_CharacterBase::GetQuickBarComponent() const
 {
 	if (ATD_PlayerControllerBase* PC = Cast<ATD_PlayerControllerBase>(GetController()))
 	{
@@ -50,7 +50,7 @@ inline UTD_QuickBarComponent* ATD_CharacterBase::GetQuickBarComponent() const
 	return nullptr;
 }
 
-inline UTD_WeaponStateComponent* ATD_CharacterBase::GetWeaponStateComponent() const
+UTD_WeaponStateComponent* ATD_CharacterBase::GetWeaponStateComponent() const
 {
 	if (ATD_PlayerControllerBase* PC = Cast<ATD_PlayerControllerBase>(GetController()))
 	{

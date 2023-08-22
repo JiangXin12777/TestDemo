@@ -38,7 +38,7 @@ bool UTD_AbilitySystemComponent::TryBatchRPCTryActivateAbility(FGameplayAbilityS
 }
 
 void UTD_AbilitySystemComponent::GetActiveAbilitiesWithTags(const FGameplayTagContainer& GameplayTagContainer,
-	TArray<UTD_GameplayAbility*>& ActiveAbilities) const
+	TArray<UGameplayAbility*>& ActiveAbilities) const
 {
 	TArray<FGameplayAbilitySpec*> AbilitiesToActivate;
 	GetActivatableGameplayAbilitySpecsByAllMatchingTags(GameplayTagContainer, AbilitiesToActivate, false);
@@ -51,12 +51,21 @@ void UTD_AbilitySystemComponent::GetActiveAbilitiesWithTags(const FGameplayTagCo
 
 		for (UGameplayAbility* ActiveAbility : AbilityInstances)
 		{
-			if (UTD_GameplayAbility* GA =Cast<UTD_GameplayAbility>(ActiveAbility))
-			{
-				ActiveAbilities.Add(GA);
-			}
+			ActiveAbilities.Add(ActiveAbility);
 		}
 	}
+}
+
+bool UTD_AbilitySystemComponent::IsActiveAbilitiesWithTags(FGameplayTagContainer AbilityTags) const
+{
+	TArray<UGameplayAbility*> ActiveAbilities;
+	GetActiveAbilitiesWithTags(AbilityTags, ActiveAbilities);
+	return ActiveAbilities.Num() > 0;
+}
+
+bool UTD_AbilitySystemComponent::IsActiveAbilitiesWithClass(TSubclassOf<UGameplayAbility> InAbilityClass)
+{
+	return InAbilityClass ? IsActiveAbilitiesWithTags(InAbilityClass.GetDefaultObject()->AbilityTags) : false;
 }
 
 bool UTD_AbilitySystemComponent::ShouldDoServerAbilityRPCBatch() const

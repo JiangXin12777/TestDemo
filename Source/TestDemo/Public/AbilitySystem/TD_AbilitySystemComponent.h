@@ -31,7 +31,7 @@ public:
 	 * 
 	 * @return 
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Abilities")
+	UFUNCTION(BlueprintCallable, Category = "TD|Abilities")
 	virtual bool TryBatchRPCTryActivateAbility(FGameplayAbilitySpecHandle InAbilityHandle, bool EndAbilityImmediately);
 
 	/**
@@ -40,9 +40,24 @@ public:
 	 * @param GameplayTagContainer 需要匹配那些标签
 	 * @param ActiveAbilities 返回当前激活的 GA
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Abilities")
-	void GetActiveAbilitiesWithTags(const FGameplayTagContainer& GameplayTagContainer, TArray<UTD_GameplayAbility*>& ActiveAbilities) const;
+	UFUNCTION(BlueprintCallable, Category = "TD|Abilities")
+	void GetActiveAbilitiesWithTags(const FGameplayTagContainer& GameplayTagContainer, TArray<UGameplayAbility*>& ActiveAbilities) const;
 
+	/**
+	 * 当前传入的标签是否为激活状态
+	 * 
+	 * @param AbilityTags 需要匹配的标签
+	 */
+	UFUNCTION(BlueprintCallable, Category = "TD|Abilities")
+	bool IsActiveAbilitiesWithTags(FGameplayTagContainer AbilityTags) const;
+
+	/**
+	 * 当前传入的类型是否为激活状态
+	 *
+	 * @param InAbilityClass 需要匹配的类型
+	 */
+	UFUNCTION(BlueprintCallable, Category = "TD|Abilities")
+	bool IsActiveAbilitiesWithClass(TSubclassOf<UGameplayAbility> InAbilityClass);
 
 protected:
 	// ~Begin UAbilitySystemComponent Interface

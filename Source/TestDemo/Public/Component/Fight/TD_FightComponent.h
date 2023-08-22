@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ComboExamine.h"
 #include "GameplayTagContainer.h"
 #include "TD_FightComponent.generated.h"
 
@@ -29,7 +30,13 @@ public:
 	}
 
 	UFUNCTION(BlueprintCallable, Category = "TD|Fight")
-	void TryAttack(FGameplayTagContainer AbilityTags);
+	void TryComboAttack(TSubclassOf<UGameplayAbility> InAbilityClass);
+
+	UFUNCTION(BlueprintCallable, Category = "TD|Fight")
+	void DoAttack(TSubclassOf<UGameplayAbility> InAbilityClass) const;
+
+	UFUNCTION(BlueprintCallable, Category = "TD|Fight")
+	void Released();
 
 	UFUNCTION(BlueprintCallable, Category = "TD|Fight")
 	void TryBlock();
@@ -37,23 +44,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TD|Fight")
 	void TrySprint();
 
+	const FComboExamine& GetComboExamine() const { return ComboExamine; }
+	FComboExamine& GetComboExamine() { return ComboExamine; }
+
 protected:
-	/**
-	 * 当前传入的标签是否为激活状态
-	 * 
-	 * @param AbilityTags 需要匹配的标签
-	 */
 	UFUNCTION(BlueprintCallable, Category = "TD|Abilities")
-	bool IsActiveAbilitiesWithTags(FGameplayTagContainer AbilityTags) const;
+	bool IsActiveAbilitiesWithClass(TSubclassOf<UGameplayAbility> InAbilityClass) const;
 
-	/**
-	 * 通过指定标签获取当前激活的 GA
-	 * 
-	 * @param AbilityTags 需要匹配的标签
-	 * @param ActiveAbilities 返回当前激活的 GA
-	 */
-	UFUNCTION(BlueprintCallable, Category = "TD|Abilities")
-	void GetActiveAbilitiesWithTags(FGameplayTagContainer AbilityTags, TArray<UTD_GameplayAbility*>& ActiveAbilities) const;
-
-	void DoAttack(FGameplayTagContainer AbilityTags);
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "TD|Combo")
+	FComboExamine ComboExamine;
 };

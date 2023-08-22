@@ -96,6 +96,11 @@ UTD_InventoryItemInstance* UTD_QuickBarComponent::GetActiveSlotItem() const
 	return Slots.IsValidIndex(ActiveSlotIndex) ? Slots[ActiveSlotIndex] : nullptr;
 }
 
+UTD_EquipmentInstance* UTD_QuickBarComponent::GetActiveEquippedItem() const
+{
+	return EquippedItem;
+}
+
 int32 UTD_QuickBarComponent::GetNextFreeItemSlot() const
 {
 	int32 SlotIndex = 0;
