@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "TD_EquipmentType.h"
 #include "TD_EquipmentDefinition.generated.h"
 
@@ -21,7 +22,11 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category=Equipment)
 	TSubclassOf<UTD_EquipmentInstance> InstanceType;
 
-	// Gameplay ability sets to grant when this is equipped
+	/** 武器类型 */
+	UPROPERTY(EditDefaultsOnly, Category=Equipment)
+	FGameplayTag WeaponTypeTag;
+
+	/** 装备此装备后可授予游戏能力 */
 	UPROPERTY(EditDefaultsOnly, Category=Equipment)
 	TArray<TObjectPtr<const UTD_AbilitySet>> AbilitySetsToGrant;
 

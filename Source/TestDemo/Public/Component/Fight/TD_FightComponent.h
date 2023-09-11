@@ -42,7 +42,7 @@ public:
 	void TryBlock();
 	
 	UFUNCTION(BlueprintCallable, Category = "TD|Fight")
-	void TrySprint();
+	void TryRoll();
 
 	const FComboExamine& GetComboExamine() const { return ComboExamine; }
 	FComboExamine& GetComboExamine() { return ComboExamine; }

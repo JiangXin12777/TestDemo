@@ -3,6 +3,7 @@
 #include "AbilitySystemComponent.h"
 #include "AbilitySystemGlobals.h"
 #include "AbilitySystem/TD_AbilitySystemComponent.h"
+#include "AbilitySystem/Abilities/GameplayAbility_PlayMontageAndWaitForEvent.h"
 #include "GameplayTag/TD_GameplayTags.h"
 #include "Log/TD_Log.h"
 
@@ -28,6 +29,12 @@ void UTD_FightComponent::TryComboAttack(TSubclassOf<UGameplayAbility> InAbilityC
 		{
 			ComboExamine.Reset();
 			ComboExamine.ComboClass = InAbilityClass;
+
+			UGameplayAbility_PlayMontageAndWaitForEvent* GA = Cast<UGameplayAbility_PlayMontageAndWaitForEvent>(InAbilityClass.GetDefaultObject());
+			if (GA)
+			{
+				ComboExamine.MaxIndex = GA->GetCompositeSectionsNumber();
+			}
 		
 			bFirstAttack = true;
 		}
@@ -66,11 +73,11 @@ void UTD_FightComponent::TryBlock()
 	}
 }
 
-void UTD_FightComponent::TrySprint()
+void UTD_FightComponent::TryRoll()
 {
 	if (UTD_AbilitySystemComponent* ASC = GetAbilitySystemComponent<UTD_AbilitySystemComponent>())
 	{
-		ASC->TryActivateAbilitiesByTag(FGameplayTagContainer(TD::Attack_Sprint));
+		ASC->TryActivateAbilitiesByTag(FGameplayTagContainer(TD::Attack_Roll));
 	}
 }
 

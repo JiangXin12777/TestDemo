@@ -5,6 +5,8 @@
 #include "Equipment/TD_EquipmentManagerComponent.h"
 #include "GameMode/TD_PlayerControllerBase.h"
 #include "Movement/TD_CharacterMovementComponent.h"
+#include "Movement/TD_WallRunComponent.h"
+#include "Net/UnrealNetwork.h"
 
 ATD_CharacterBase::ATD_CharacterBase(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer.SetDefaultSubobjectClass<UTD_CharacterMovementComponent>(ACharacter::CharacterMovementComponentName))
@@ -15,6 +17,8 @@ ATD_CharacterBase::ATD_CharacterBase(const FObjectInitializer& ObjectInitializer
 	EquipmentManagerComponent = CreateDefaultSubobject<UTD_EquipmentManagerComponent>(TEXT("EquipmentManagerComponent"));
 
 	FightComponent = CreateDefaultSubobject<UTD_FightComponent>(TEXT("FightComponent"));
+
+	WallRunComponent = CreateDefaultSubobject<UTD_WallRunComponent>(TEXT("WallRunComponent"));
 }
 
 UTD_AbilitySystemComponent* ATD_CharacterBase::GetTDAbilitySystemComponent() const
@@ -64,14 +68,26 @@ UTD_FightComponent* ATD_CharacterBase::GetFightComponent() const
 	return FightComponent;
 }
 
+UTD_WallRunComponent* ATD_CharacterBase::GetWallRunComponent() const
+{
+	return WallRunComponent;
+}
+
+bool ATD_CharacterBase::TryWallJump() const
+{
+	check(WallRunComponent);
+	return WallRunComponent->StartWallJump();
+}
+
+void ATD_CharacterBase::StopWallJump() const
+{
+	check(WallRunComponent);
+	WallRunComponent->StopWallJump();
+}
+
 UAbilitySystemComponent* ATD_CharacterBase::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
-}
-
-void ATD_CharacterBase::OnRep_PlayerState()
-{
-	Super::OnRep_PlayerState();
 }
 
 void ATD_CharacterBase::BeginPlay()
@@ -87,6 +103,11 @@ void ATD_CharacterBase::EndPlay(const EEndPlayReason::Type EndPlayReason)
 void ATD_CharacterBase::BeginDestroy()
 {
 	Super::BeginDestroy();
+}
+
+void ATD_CharacterBase::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
 }
 
 void ATD_CharacterBase::PossessedBy(AController* NewController)
@@ -112,4 +133,15 @@ void ATD_CharacterBase::OnRep_Controller()
 	{
 		AbilitySystemComponent->RefreshAbilityActorInfo();
 	}
+}
+
+void ATD_CharacterBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(ThisClass, CurrentCharacterState);
+}
+
+void ATD_CharacterBase::OnRep_CurrentCharacterState(ECharacterState OldVal)
+{
 }

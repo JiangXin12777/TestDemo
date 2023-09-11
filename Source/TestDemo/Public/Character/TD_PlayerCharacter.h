@@ -17,15 +17,15 @@ class ATD_PlayerCharacter
 {
 	GENERATED_BODY()
 
-	/** 吊臂组件 */
+	/** !吊臂组件 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TD|Camera", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<USpringArmComponent> CameraBoom;
 
-	/** 相机组件 */
+	/** !相机组件 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TD|Camera", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UCameraComponent> FollowCamera;
 
-	/** 输入组件 */
+	/** !输入组件 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "TD|Camera", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UNinjaInputManagerComponent> InputManagerComponent;
 	
