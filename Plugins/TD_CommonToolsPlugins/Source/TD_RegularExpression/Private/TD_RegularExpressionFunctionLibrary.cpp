@@ -3,6 +3,21 @@
 
 #include "TD_RegularExpressionFunctionLibrary.h"
 
+bool UTD_RegularExpressionFunctionLibrary::RegexMatch(const FString& Str, const FString& Pattern,
+	TArray<FString>& Result)
+{
+	FRegexPattern MatherPatter(Pattern);
+	FRegexMatcher Matcher(MatherPatter, Str);
+
+	while (Matcher.FindNext())
+	{
+		Result.Add(Matcher.GetCaptureGroup(0));
+
+	}
+
+	return Result.Num() == 0 ? false : true;
+}
+
 bool UTD_RegularExpressionFunctionLibrary::IsStrongPassword(const FString& InStr)
 {
 	// 正则表达式模式

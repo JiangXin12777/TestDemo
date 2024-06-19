@@ -15,6 +15,9 @@ class TD_REGULAREXPRESSION_API UTD_RegularExpressionFunctionLibrary : public UBl
 	GENERATED_BODY()
 
 public:
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "Find Str with RegularExpression", Keywords = "RegularExpression sample test testing"), Category = "RegularExpression")
+	static bool RegexMatch(const FString& Str, const FString& Pattern, TArray<FString>& Result);
+	
 	/** 大小写字母，数字，特殊字符，长度8-16 */
 	UFUNCTION(BlueprintPure, Category = "RegularExpression")
 	static bool IsStrongPassword(const FString& InStr);
